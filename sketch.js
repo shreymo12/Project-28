@@ -9,10 +9,11 @@ const Render = Matter.Render;
 var stone,tree,ground,boy;
 var mango1,mango2,mango3,mango4,mango5,mango6,mango7,mango8,mango9,mango10;
 var slingShot;
+var launchingForce=100;
 
 function preload()
 {
-	boy = loadImage("image/boy.png");
+	//boy = loadImage("image/boy.png");
 }
 
 function setup() {
@@ -39,8 +40,16 @@ function setup() {
 	mango10 = new Mango(1160,70);
 
 	 slingShot = new Slingshot(stone.body,{x:235,y:420});
-
-
+	 
+	 var render = Render.create({
+		element: document.body,
+		engine: engine,
+		options: {
+		  width: 1300,
+		  height: 600,
+		  wireframes: false
+		}
+	  });
 
 	Engine.run(engine);
   
@@ -66,24 +75,25 @@ function draw() {
   mango9.display();
   mango10.display();
   slingShot.display();
+  
 
-  detectollision(stone.body,mango1.body,);
-  detectollision(stone.body,mango2.body);
-  detectollision(stone.body,mango3.body);
-  detectollision(stone.body,mango4.body);
-  detectollision(stone.body,mango5.body);
-  detectollision(stone.body,mango6.body);
-  detectollision(stone.body,mango7.body);
-  detectollision(stone.body,mango8.body);
-  detectollision(stone.body,mango9.body);
-  detectollision(stone.body,mango10.body);
+  detectollision(stone,mango1);
+  detectollision(stone,mango2);
+  detectollision(stone,mango3);
+  detectollision(stone,mango4);
+  detectollision(stone,mango5);
+  detectollision(stone,mango6);
+  detectollision(stone,mango7);
+  detectollision(stone,mango8);
+  detectollision(stone,mango9);
+  detectollision(stone,mango10);
   
   drawSprites();
  
 }
 function mouseDragged()
 {
-	Matter.Body.setPosition(stone.body, {x:mouseX, y:mouseY}) 
+	Matter.Body.setPosition(stone.body, {x:mouseX, y:mouseY}) ;
 }
 
 function mouseReleased()
